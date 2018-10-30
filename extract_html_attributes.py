@@ -1,12 +1,9 @@
 from qgis.PyQt.QtCore import QVariant
 from bs4 import BeautifulSoup
 
-# PyQGIS function to extract HTML attributes encoded in a string into seperate field
-# Instructions to convert GeoRSS layers from Bhuvan GeoServer to GeoJSON. Customize the parse_HTML_attributes function for other sources  
-# 1. Open the GeoRSS XML and save the layer as a GeoJSON
-# 2. Select the GeoJSON layer in the layer list
-# 3. Open `Plugins > Python Console`and run the script from the code editor
-# 4. Open the layer attribute table to verify the parsed HTML values
+# PyQGIS function to extract HTML attributes encoded in a string into seperate fields
+# Select the layer to process from the layer list
+# Layer format needs to be supported by QGIS for editing. Pre convert your layer into GeoJSON or SHP
 # Processing can take around 1 minute for 5,000 features
 
 def parse_HTML_attributes(feature):
