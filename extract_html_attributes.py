@@ -55,22 +55,25 @@ else:
 for feature in feature_list: 
     new_fields.update(parse_HTML_attributes(feature))
 
-with edit(layer):
-    # Add the new string fields to the layer attribute table
-    for key in new_fields:
-        layer.addAttribute(QgsField(key, parse_string_type(new_fields[key])))
-        print('Added new field', key, parse_string_type(new_fields[key]))
-    
-    # Build a list of features to update from the active selection
-    feature_list = layer.selectedFeatures() or layer.getFeatures(QgsFeatureRequest())
-    
-    # Update the new attributes with the parsed HTML attributes
-    for feature in feature_list:
-        parsed_HTML_attributes = parse_HTML_attributes(feature)
-        for key in parsed_HTML_attributes:
-           feature[key] = parsed_HTML_attributes[key]
-        layer.updateFeature(feature)
-    print('Features updated')
 
- 
-
+try:
+    with edit(layer):
+        
+        # Add the new string fields to the layer attribute table
+        for key in new_fields:
+            layer.addAttribute(QgsField(key, parse_string_type(new_fields[key])))
+            print('Added new field', key, parse_string_type(new_fields[key]))
+        
+        # Build a list of features to update from the active selection
+        feature_list = layer.selectedFeatures() or layer.getFeatures(QgsFeatureRequest())
+        
+        # Update the new attributes with the parsed HTML attributes
+        for feature in feature_list:
+            parsed_HTML_attributes = parse_HTML_attributes(feature)
+            for key in parsed_HTML_attributes:
+               feature[key] = parsed_HTML_attributes[key]
+            layer.updateFeature(feature)
+        print('Features updated')
+        
+except AssertionError:
+    print('Please convert the layer into a QGIS editable format. Geopackage is recommended for fastest result')
