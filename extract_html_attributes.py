@@ -8,7 +8,7 @@ import ast
 # 2. Select the GeoJSON layer in the layer list
 # 3. Open `Plugins > Python Console`and run the script from the code editor
 # 4. Open the layer attribute table to verify the parsed HTML values
-# Processing can take around 1 minute for 5,000 features
+# Processing can take around 1 minute for 5,000 features. To optimize, you may want to select a limited set of features in the layer first, so that the processing is limited to them.
 
 def parse_HTML_attributes(feature):
     "Parse attributes encoded in a HTML string into a dictionary"
